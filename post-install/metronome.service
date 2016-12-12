@@ -1,0 +1,12 @@
+[Unit]
+Description="metronome bot"
+
+[Service]
+Environment="HOME=/root"
+#User=root
+ExecStart=/sbin/metronome
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

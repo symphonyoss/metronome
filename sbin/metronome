@@ -1,0 +1,4 @@
+#!/bin/bash
+source /opt/metronome/venv/bin/activate
+metronome.py "$@"
+deactivate
