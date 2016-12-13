@@ -27,7 +27,7 @@ reqs = [str(ir.req) for ir in install_reqs]
 
 setup(
     name='metronome',
-    version='0.0.3',
+    version='0.0.4',
     description='Metronome Bot for Symphony',
     author='Engineering Services',
     author_email='symphony-engservices@symphony.com',
