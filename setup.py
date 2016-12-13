@@ -29,8 +29,8 @@ setup(
     version='0.0.4',
     description='Metronome Bot for Symphony',
     author='Engineering Services',
-    author_email='symphony-engservices@symphony.com',
-    url='https://symphony.engineering/',
+    author_email='matt@nycresistor.com',
+    url='https://github.com/symphonyoss/metronome/',
     # install dependencies from requirements.txt
     install_requires=reqs,
     packages=find_packages(),
