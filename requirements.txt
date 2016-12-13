@@ -5,6 +5,7 @@
 pip
 
 # app dependencies
+argparse
 requests
 pytz
 lxml

@@ -8,6 +8,7 @@ __author__ = 'Matt Joyce'
 __email__ = 'matt.joyce@symphony.com'
 __copyright__ = 'Copyright 2016, Symphony'
 
+import argparse
 import datetime
 import json
 import logging
@@ -15,11 +16,6 @@ import symphony
 import sys
 import time
 import uuid
-
-# silence INFO alerts from requests module
-logging.getLogger("requests").setLevel(logging.WARNING)
-logging.getLogger("urllib3").setLevel(logging.WARNING)
-logging.basicConfig(filename='/var/log/metronome.log', level=logging.INFO, format='%(asctime)s %(message)s')
 
 
 def get_counter():
@@ -45,8 +41,49 @@ def inc_counter():
 
 def main():
     ''' main program loop '''
+    # CLI flag parsing
+    parser = argparse.ArgumentParser(description='metronome bot')
+    # specify config file
+    parser.add_argument(
+        '-c', '--config', nargs='?',
+        help='specify path to config file',
+        default='/etc/metronome/metronome.cfg'
+    )
+    # specify logging file
+    parser.add_argument(
+        '-l', '--log', nargs='?',
+        help='specify path to log file',
+        default='/var/log/metronome/metronome.log'
+    )
+    # specify debug logging
+    parser.add_argument(
+        '-d', '--debug',
+        action='store_true',
+        help='debug logging'
+    )
+    # specify cache counter file
+    parser.add_argument(
+        '--counter', nargs='?',
+        help='specify path to cache counter',
+        default='/var/cache/metronome/counter'
+    )
+    # parse
+    try:
+        args = parser.parse_args()
+    except Exception, err:
+        print 'failed to parse arguments: %s' % err
+        sys.exit(1)
+    # silence INFO alerts from requests module
+    logging.getLogger("requests").setLevel(logging.WARNING)
+    logging.getLogger("urllib3").setLevel(logging.WARNING)
+    # toggle on debug flag
+    if args.debug is False:
+        logging.basicConfig(filename=args.log, level=logging.INFO, format='%(asctime)s %(message)s')
+    else:
+        logging.basicConfig(filename=args.log, level=logging.DEBUG, format='%(asctime)s %(message)s')
+
     # run configuration
-    conn = symphony.Config('/etc/metronome/metronome.cfg')
+    conn = symphony.Config(args.config)
     # connect to pod
     try:
         agent, pod, symphony_sid = conn.connect()
