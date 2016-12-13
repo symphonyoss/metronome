@@ -42,3 +42,35 @@ this application can be installed as an rpm or from a python setup.py.
 will install this application, however it is recommended to install it within a virtualenv
 
 You will also need to complete a metronome config file.
+
+Configuration
+-------------
+
+Example config file:
+
+   [symphony]
+   # uri for /pod endpoint
+   symphony_pod_uri: https://vanityname.symphony.com/
+   symphony_keymanager_uri: https://vanityname.symphony.com:8444/
+   symphony_agent_uri: https://vanityname.symphony.com:8444/
+   symphony_sessionauth_uri: https://vanityname.symphony.com:8444/
+   symphony_p12: /etc/es-bot/certs/bot.user100.p12
+   symphony_pwd: passwordforPKCSfile
+   symphony_sid: example_gLc8hdZBHut6CUJnwMmzH3___qcqBgDKdA
+
+Execution
+---------
+
+   metronome.py -h
+   usage: metronome.py [-h] [-c [CONFIG]] [-l [LOG]] [-d] [--counter [COUNTER]]
+
+   metronome bot
+
+   optional arguments:
+     -h, --help            show this help message and exit
+     -c [CONFIG], --config [CONFIG]
+                        specify path to config file
+     -l [LOG], --log [LOG]
+                        specify path to log file
+     -d, --debug           debug logging
+     --counter [COUNTER]   specify path to cache counter
