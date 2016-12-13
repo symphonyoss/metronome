@@ -26,7 +26,7 @@ reqs = [str(ir.req) for ir in install_reqs]
 
 setup(
     name='metronome',
-    version='0.0.15',
+    version='0.0.16',
     description='metronome diagnostics bot',
     author='Matt Joyce',
     author_email='matt@nycresistor.com',
