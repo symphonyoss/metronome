@@ -68,9 +68,9 @@ def main():
             connection_resp = pod.list_connections()
             for request in connection_resp:
                 if request['status'] == 'PENDING_INCOMING':
-                    ret_data = pod.accept_connection(request['userId'])
+                    pod.accept_connection(request['userId'])
             # perform user search globally
-            search_filter = {"company":"Symphony Corporate"}
+            search_filter = {"company": "Symphony Corporate"}
             local = 'false'
             search_resp, search_ret = pod.search_user('maximilian', search_filter, local)
             search_data = json.loads(search_ret)
