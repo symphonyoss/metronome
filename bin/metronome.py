@@ -29,6 +29,7 @@ def get_counter():
     cachefile.close()
     return count
 
+
 def inc_counter():
     cachefile = open('/var/cache/metronome/counter', 'r+')
     count = get_counter()
@@ -38,6 +39,7 @@ def inc_counter():
     cachefile.write(count)
     cachefile.close()
     return count
+
 
 def main():
     ''' main program loop '''
@@ -84,11 +86,11 @@ def main():
             msgFormat = 'MESSAGEML'
             message = '<messageML><b>%s ( %s )</b> <i>%s</i> \
                        %s - search maximilian - <b> %s </b> : <i> %s </i> </messageML>'\
-                      % ('tick', 
-                         str(count), 
-                         datetime.datetime.now(), 
-                         uuid.uuid4(), 
-                         str(search_resp), 
+                      % ('tick',
+                         str(count),
+                         datetime.datetime.now(),
+                         uuid.uuid4(),
+                         str(search_resp),
                          search_stats)
             # send message
             retstring = agent.send_message(symphony_sid, msgFormat, message)
