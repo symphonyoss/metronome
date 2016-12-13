@@ -11,8 +11,8 @@ __copyright__ = 'Copyright 2016, Symphony'
 import datetime
 import json
 import logging
-import sys
 import symphony
+import sys
 import time
 import uuid
 
@@ -23,6 +23,7 @@ logging.basicConfig(filename='/var/log/metronome.log', level=logging.INFO, forma
 
 
 def get_counter():
+    ''' get current count '''
     cachefile = open('/var/cache/metronome/counter', 'r')
     count = cachefile.read().rstrip()
     count = int(count)
@@ -31,6 +32,7 @@ def get_counter():
 
 
 def inc_counter():
+    ''' increment the counter '''
     cachefile = open('/var/cache/metronome/counter', 'r+')
     count = get_counter()
     count += 1
@@ -45,6 +47,7 @@ def main():
     ''' main program loop '''
     # run configuration
     conn = symphony.Config('/etc/metronome/metronome.cfg')
+    # connect to pod
     try:
         agent, pod, symphony_sid = conn.connect()
     except Exception, err:
@@ -57,7 +60,7 @@ def main():
     except Exception, err:
         print 'failed to allocate datafeed id: %s' % err
         sys.exit(1)
-    # msgFormat = 'TEXT'
+    # main loop
     while True:
         # this polls and returns a list of alert ids
         try:
