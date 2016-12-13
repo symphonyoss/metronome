@@ -59,12 +59,15 @@ def main():
     while True:
         # this polls and returns a list of alert ids
         try:
+            # increment counter and initiate sleep cycle
             inc_counter()
             time.sleep(5)
-            # perform user search globally
+            # accept pending connection requests
             connection_resp = pod.list_connections()
             for request in connection_resp:
-                ret_data = pod.accept_connection(request['userId'])
+                if request['status'] == 'PENDING_INCOMING':
+                    ret_data = pod.accept_connection(request['userId'])
+            # perform user search globally
             search_filter = {"company":"Symphony Corporate"}
             local = 'false'
             search_resp, search_ret = pod.search_user('maximilian', search_filter, local)
@@ -73,15 +76,24 @@ def main():
             searched_id = search_data['users'][0]['id']
             searched_email = search_data['users'][0]['emailAddress']
             searched_name = search_data['users'][0]['displayName']
-            search_stats = '%s results found, showing first : (%s) %s - %s' % (searched_count, searched_id, searched_name, searched_email)
+            search_stats = '%s results found, showing first : (%s) %s - %s'\
+                           % (searched_count, searched_id, searched_name, searched_email)
             # check counter
             count = get_counter()
-            # send polling message
+            # build polling message
             msgFormat = 'MESSAGEML'
-            message = '<messageML><b>%s ( %s )</b> <i>%s</i> %s - search maximilian - <b> %s </b> : <i> %s </i> </messageML>'\
-                      % ('tick', str(count), datetime.datetime.now(), uuid.uuid4(), str(search_resp), search_stats)
+            message = '<messageML><b>%s ( %s )</b> <i>%s</i> \
+                       %s - search maximilian - <b> %s </b> : <i> %s </i> </messageML>'\
+                      % ('tick', 
+                         str(count), 
+                         datetime.datetime.now(), 
+                         uuid.uuid4(), 
+                         str(search_resp), 
+                         search_stats)
+            # send message
             retstring = agent.send_message(symphony_sid, msgFormat, message)
             print retstring
+        # if main loop fails... try to reconnect
         except Exception, err:
             try:
                 datafeed_id = agent.create_datafeed()
