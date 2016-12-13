@@ -49,6 +49,7 @@ Configuration
 Example config file:
 
 .. code:: text
+
    [symphony]
    # uri for /pod endpoint
    symphony_pod_uri: https://vanityname.symphony.com/
@@ -63,6 +64,7 @@ Execution
 ---------
 
 .. code:: text
+
    metronome.py -h
    usage: metronome.py [-h] [-c [CONFIG]] [-l [LOG]] [-d] [--counter [COUNTER]]
 
