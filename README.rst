@@ -1,6 +1,18 @@
 metronome
 =========
 
+.. image:: https://img.shields.io/pypi/v/metronome.svg
+         :target: https://pypi.python.org/pypi/metronome/
+
+.. image:: https://img.shields.io/pypi/pyversions/metronome.svg
+         :target: https://pypi.python.org/pypi/metronome/
+
+.. image:: https://img.shields.io/pypi/format/metronome.svg
+         :target: https://pypi.python.org/pypi/metronome/
+
+.. image:: https://img.shields.io/badge/license-Apache%202-blue.svg
+         :target: https://github.com/symphonyoss/metronome/blob/master/LICENSE
+
 .. image:: https://travis-ci.org/symphonyoss/metronome.svg?branch=master
       :target: https://travis-ci.org/symphonyoss/metronome
 
