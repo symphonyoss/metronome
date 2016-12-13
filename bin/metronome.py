@@ -51,7 +51,7 @@ def main():
     )
     # specify logging file
     parser.add_argument(
-        '-l', '--log',  nargs='?',
+        '-l', '--log', nargs='?',
         help='specify path to log file',
         default='/var/log/metronome/metronome.log'
     )
@@ -77,7 +77,7 @@ def main():
     logging.getLogger("requests").setLevel(logging.WARNING)
     logging.getLogger("urllib3").setLevel(logging.WARNING)
     # toggle on debug flag
-    if args.debug == False:
+    if args.debug is False:
         logging.basicConfig(filename=args.log, level=logging.INFO, format='%(asctime)s %(message)s')
     else:
         logging.basicConfig(filename=args.log, level=logging.DEBUG, format='%(asctime)s %(message)s')
