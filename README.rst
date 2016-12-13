@@ -1,4 +1,15 @@
-# metronome
+metronome
+=========
+
+.. image:: https://travis-ci.org/symphonyoss/metronome.svg?branch=master
+      :target: https://travis-ci.org/symphonyoss/metronome
+
+.. image:: https://www.versioneye.com/user/projects/584f7bad5d8a550042585f60/badge.svg?style=flat-square
+      :target: https://www.versioneye.com/user/projects/584f7bad5d8a550042585f60
+
+
+About
+-----
 
 metronome is Symphony bot designed to provide end to end diagnostic information to the 
 Symphony Engineering Services team.  This bot is fairly simple. 
@@ -9,7 +20,8 @@ some basic information about the pod environment.
 Our ES bot listens in and adds information to our local trends database and can alert our team to any problems
 directly as needed.
 
-## Installation
+Installation
+------------
 
 this application can be installed as an rpm or from a python setup.py.
 
