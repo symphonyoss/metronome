@@ -37,6 +37,8 @@ Installation
 
 this application can be installed as an rpm or from a python setup.py.
 
+.. code:: bash
+
    python setup.py install
 
 will install this application, however it is recommended to install it within a virtualenv
