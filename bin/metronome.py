@@ -29,6 +29,7 @@ def get_counter():
     cachefile.close()
     return count
 
+
 def inc_counter():
     cachefile = open('/var/cache/metronome/counter', 'r+')
     count = get_counter()
@@ -38,6 +39,7 @@ def inc_counter():
     cachefile.write(count)
     cachefile.close()
     return count
+
 
 def main():
     ''' main program loop '''
@@ -66,9 +68,9 @@ def main():
             connection_resp = pod.list_connections()
             for request in connection_resp:
                 if request['status'] == 'PENDING_INCOMING':
-                    ret_data = pod.accept_connection(request['userId'])
+                    pod.accept_connection(request['userId'])
             # perform user search globally
-            search_filter = {"company":"Symphony Corporate"}
+            search_filter = {"company": "Symphony Corporate"}
             local = 'false'
             search_resp, search_ret = pod.search_user('maximilian', search_filter, local)
             search_data = json.loads(search_ret)
@@ -84,11 +86,11 @@ def main():
             msgFormat = 'MESSAGEML'
             message = '<messageML><b>%s ( %s )</b> <i>%s</i> \
                        %s - search maximilian - <b> %s </b> : <i> %s </i> </messageML>'\
-                      % ('tick', 
-                         str(count), 
-                         datetime.datetime.now(), 
-                         uuid.uuid4(), 
-                         str(search_resp), 
+                      % ('tick',
+                         str(count),
+                         datetime.datetime.now(),
+                         uuid.uuid4(),
+                         str(search_resp),
                          search_stats)
             # send message
             retstring = agent.send_message(symphony_sid, msgFormat, message)
