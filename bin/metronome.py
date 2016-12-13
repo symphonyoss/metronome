@@ -42,40 +42,42 @@ def inc_counter():
 def main():
     ''' main program loop '''
     # CLI flag parsing
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='metronome bot')
     # specify config file
     parser.add_argument(
-        '-c','--config',
+        '-c', '--config', nargs='?',
         help='specify path to config file',
-        default='/etc/metronome/metronome.cfg',
-        required=False
+        default='/etc/metronome/metronome.cfg'
     )
     # specify logging file
     parser.add_argument(
-        '-l','--log',
+        '-l', '--log',  nargs='?',
         help='specify path to log file',
-        default='/var/log/metronome/metronome.log',
-        required=False
+        default='/var/log/metronome/metronome.log'
     )
     # specify debug logging
-    parser.add_argument('-d','--debug',
-        help='debug logging',
-        required=False
+    parser.add_argument(
+        '-d', '--debug',
+        action='store_true',
+        help='debug logging'
     )
     # specify cache counter file
     parser.add_argument(
-        '-l','--log',
+        '--counter', nargs='?',
         help='specify path to cache counter',
-        default='/var/cache/metronome/counter',
-        required=False
+        default='/var/cache/metronome/counter'
     )
     # parse
-    args = parser.parse_args()
+    try:
+        args = parser.parse_args()
+    except Exception, err:
+        print 'failed to parse arguments: %s' % err
+        sys.exit(1)
     # silence INFO alerts from requests module
     logging.getLogger("requests").setLevel(logging.WARNING)
     logging.getLogger("urllib3").setLevel(logging.WARNING)
     # toggle on debug flag
-    if args.debug == None:
+    if args.debug == False:
         logging.basicConfig(filename=args.log, level=logging.INFO, format='%(asctime)s %(message)s')
     else:
         logging.basicConfig(filename=args.log, level=logging.DEBUG, format='%(asctime)s %(message)s')
