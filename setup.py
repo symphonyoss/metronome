@@ -26,7 +26,7 @@ reqs = [str(ir.req) for ir in install_reqs]
 
 setup(
     name='metronome',
-    version='0.0.16',
+    version='0.0.17',
     description='metronome diagnostics bot',
     author='Matt Joyce',
     author_email='matt@nycresistor.com',
@@ -39,6 +39,8 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
     ],
     keywords='symphony chat diagnostics',
     # install dependencies from requirements.txt
