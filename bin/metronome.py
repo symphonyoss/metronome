@@ -71,7 +71,7 @@ def main():
     try:
         args = parser.parse_args()
     except Exception as err:
-        print ('failed to parse arguments: %s' % (err))
+        print('failed to parse arguments: %s' % (err))
         sys.exit(1)
     # silence INFO alerts from requests module
     logging.getLogger("requests").setLevel(logging.WARNING)
@@ -88,14 +88,14 @@ def main():
     try:
         agent, pod, symphony_sid = conn.connect()
     except Exception as err:
-        print ('failed to connect to symphony: %s' % (err))
+        print('failed to connect to symphony: %s' % (err))
         sys.exit(1)
     # get datafeed
     try:
         datafeed_id = agent.create_datafeed()
-        print (datafeed_id)
+        print(datafeed_id)
     except Exception as err:
-        print ('failed to allocate datafeed id: %s' % (err))
+        print('failed to allocate datafeed id: %s' % (err))
         sys.exit(1)
     # main loop
     while True:
@@ -134,7 +134,7 @@ def main():
                          search_stats)
             # send message
             retstring = agent.send_message(symphony_sid, msgFormat, message)
-            print (retstring)
+            print(retstring)
         # if main loop fails... try to reconnect
         except Exception as err:
             try:
